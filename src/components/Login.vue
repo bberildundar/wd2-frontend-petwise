@@ -15,7 +15,7 @@
                 <button type="submit" class="btn btn-primary rounded-pill">Log In</button>
             </div>
         </form>
-        <p> Do not have an account yet? <a href="#">Create one</a> </p>
+        <p> Do not have an account yet? <router-link to="/register">Create one</router-link> </p>
     </div>
     </section>
     </template>
