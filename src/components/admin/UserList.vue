@@ -2,9 +2,12 @@
     <section>
       <div class="container">
         <h2 class="mt-3 mt-lg-5">Website Users</h2>
-          <button type="button" class="btn btn-primary mt-3">
-              Add user
-            </button>
+        <router-link to="/createuser">
+  <button type="button" class="btn btn-primary mt-3">
+    Add user
+  </button>
+</router-link>
+
             <table class="table">
   <thead>
     <tr>

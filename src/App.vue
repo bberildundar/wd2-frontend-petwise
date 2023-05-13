@@ -7,8 +7,8 @@
 <script>
 import Nav from './components/Nav.vue'
 import Footer from './components/Footer.vue'
-import Login from './components/Login.vue'
-import Register from './components/Register.vue'
+import Login from './components/auth/Login.vue'
+import Register from './components/auth/Register.vue'
 import Homepage from './components/Homepage.vue'
 import UserList from './components/admin/UserList.vue'
 import VetList from './components/admin/VetList.vue' // maybe i dont have to add all these like that
