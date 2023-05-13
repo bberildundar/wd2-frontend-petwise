@@ -27,7 +27,8 @@
             <button type="submit" class="btn btn-primary rounded-pill">Sign Up</button>
         </div>
     </form>
-    <p> Already a user? <a href="#">Log In</a> </p>
+    <p> Already a user? <router-link to="/login">Log In</router-link> </p>
+
 </div>
     </section>
     </template>
