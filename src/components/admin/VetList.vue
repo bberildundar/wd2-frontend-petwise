@@ -2,9 +2,11 @@
     <section>
       <div class="container">
         <h2 class="mt-3 mt-lg-5">Veterinarians</h2>
-          <button type="button" class="btn btn-primary mt-3">
-              Add user
-            </button>
+        <router-link to="/createVet">
+  <button type="button" class="btn btn-primary mt-3">
+    Add Vet
+  </button>
+</router-link>
             <table class="table">
   <thead>
     <tr>
