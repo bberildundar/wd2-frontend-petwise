@@ -1,31 +1,37 @@
 <template>
-  <Nav />
-  <router-view />
-  <Footer/>
+  <header>
+    <div>
+      <NavigationBar></NavigationBar>
+    </div>
+  </header>
+  <RouterView />
+  <FooterBar></FooterBar>
 </template>
 
+
 <script>
-import Nav from './components/Nav.vue'
-import Footer from './components/Footer.vue'
-import Login from './components/auth/Login.vue'
-import Register from './components/auth/Register.vue'
-import Homepage from './components/Homepage.vue'
-import UserList from './components/admin/UserList.vue'
-import VetList from './components/admin/VetList.vue' // maybe i dont have to add all these like that
+import { RouterLink, RouterView } from 'vue-router'
+import NavigationBar from './components/Nav.vue'
+import FooterBar from './components/Footer.vue'
+
 
 export default {
   name: "App",
   components: {
-
-    Nav,
-    Login,
-    Register,
-    Homepage,
-    Footer,
-    UserList,
-    VetList
+    NavigationBar,
+    FooterBar
+  }, data() {
+    return {
+      //store: userStore()
+    };
+  }, mounted() {
+    
+  },
+  methods: {
+    
   }
-};
+}
+  ;
 </script>
 
 <style scoped>
