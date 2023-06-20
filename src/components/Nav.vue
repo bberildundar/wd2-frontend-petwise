@@ -24,16 +24,32 @@
           </li>
 
         </ul>
-        <router-link to="/login" class="btn btn-outline-success rounded-pill me-2">Log In</router-link>
-        <router-link to="/register" class="btn btn-outline-dark rounded-pill">Sign Up</router-link>
+        <button v-if="isLoggedIn" type="button" @click="logout"
+          class="btn btn-outline-danger rounded-pill me-2">Logout
+        </button>
+        <router-link v-else to="/login" class="btn btn-outline-success rounded-pill me-2">Log In</router-link>
+        <router-link v-if="!isLoggedIn" to="/register" class="btn btn-outline-dark rounded-pill">
+      Sign Up
+    </router-link>
       </div>
     </div>
   </nav>
 </template>
   
 <script>
+import { userStore } from '../stores/user.js';
 export default {
   name: "Nav",
+  data() {
+    return {
+      store: userStore()
+    };
+  },
+  computed: {
+    isLoggedIn() {
+      return this.store.getToken != '';
+    }
+  },
   methods: {
     scrollToVeterinarians() {
       document.querySelector('#home-veterinarians-header').scrollIntoView({
@@ -44,6 +60,10 @@ export default {
       document.querySelector('#home-address-and-contact-header').scrollIntoView({
         behavior: 'smooth'
       });
+    },
+    logout() {
+      this.store.logout();
+      this.$router.push('/');
     }
   }
 };
