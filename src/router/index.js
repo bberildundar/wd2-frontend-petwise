@@ -7,6 +7,7 @@ import UserList from '../components/admin/UserList.vue'
 import VetList from '../components/admin/VetList.vue'
 import CreateUser from '../components/admin/CreateUser.vue'
 import CreateVet from '../components/admin/CreateVet.vue'
+import UpdateVet from '../components/admin/UpdateVet.vue'
 
 
 const router = createRouter({
@@ -18,7 +19,8 @@ const router = createRouter({
     { path: '/userList', component: UserList },
     { path: '/vetList', component: VetList },
     { path: '/createUser', component: CreateUser },
-    { path: '/createVet', component: CreateVet }
+    { path: '/createVet', component: CreateVet },
+    { path: '/updateVet/:id', component: UpdateVet, props: true}
   ]
 })
 export default router
