@@ -1,7 +1,7 @@
 <template>
     <section>
         <div class="container">
-            <router-link to="/">
+            <router-link to="/userList">
                 <button type="button" class="btn btn-primary m-2">
                     Back
                 </button>
@@ -20,7 +20,7 @@
             <form>
                 <div class="m-2 form-group">
                     <label for="userEmail">User Email</label>
-                    <input type="text" class="my-2 form-control" v-model="email" id="userEmail" aria-describedby="userEmail"
+                    <input type="text" class="my-2 form-control" v-model="user.email" id="userEmail" aria-describedby="userEmail"
                         placeholder="email@email.com" required>
                 </div>
                 <div class="m-2 form-group">
@@ -30,7 +30,7 @@
                 </div>
                 <div class="m-2 form-group">
                     <p>Selected Role: {{ selectedRole }}</p>
-                    <select v-model="role">
+                    <select v-model="user.role">
                         <option value="1">Admin</option>
                         <option value="0">User</option>
                     </select>
@@ -98,6 +98,8 @@ export default {
             .then((result) => {
                 console.log(result);
                 this.user = result.data;
+                this.role = result.data.role;
+                this.email = result.data.email;
             })
             .catch((error) => console.log(error));
     },

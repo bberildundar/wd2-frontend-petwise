@@ -4,11 +4,8 @@
         <li class="nav-item">
   <router-link to="/" class="nav-link px-2 text-body-secondary">Homepage</router-link>
 </li>
-<li class="nav-item">
+<li class="nav-item"><!-- i used <a> tag in here because these are only for scrolling. not for a new page. -->
   <a @click="scrollToVeterinarians" class="nav-link px-2 text-body-secondary" style="cursor: pointer;">Veterinarians</a>
-</li>
-<li class="nav-item">
-  <a @click="scrollToAddressAndContact" class="nav-link px-2 text-body-secondary" style="cursor: pointer;">Address & Contact</a>
 </li>
         <li class="nav-item">
   <router-link to="/login" class="nav-link px-2 text-body-secondary">Log In</router-link>
@@ -31,11 +28,6 @@
           behavior: 'smooth'
         });
       },
-      scrollToAddressAndContact() {
-        document.querySelector('#home-address-and-contact-header').scrollIntoView({
-          behavior: 'smooth'
-        });
-      }
     }
   };
   </script>
