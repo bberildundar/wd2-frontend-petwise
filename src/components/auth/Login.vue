@@ -43,11 +43,10 @@ export default {
     },
     methods: {
         login() {
-            this.store
-                .login(this.email, this.password)
-                .then(() => {
-                    router.push('/');
-                })
+            this.store.login(this.email, this.password)
+            .then(() => {
+                this.$router.replace("/");
+            })
                 .catch((error) => {
                     console.log(error);
                     this.errorText = "There was a problem while logging in to your account. " + error;

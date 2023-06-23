@@ -64,10 +64,10 @@ export default {
                 return;
             }
 
-            axios.post("http://localhost/users", {
+            axios.post("users", {
                 email: this.email,
                 password: this.password,
-                role: false //the registered new user will be a normal user (false/0) as default
+                role: 0 //the registered new user will be a normal user (0) as default
             })
                 .then(() => {
                     this.successText = "Your account have been created successfully. Now you can login. ";

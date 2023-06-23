@@ -1,11 +1,9 @@
 <template>
   <header>
-    <div>
-      <NavigationBar></NavigationBar>
-    </div>
+      <NavigationBar />
   </header>
   <RouterView />
-  <FooterBar></FooterBar>
+  <FooterBar />
 </template>
 
 
@@ -13,7 +11,7 @@
 import { RouterLink, RouterView } from 'vue-router'
 import NavigationBar from './components/Nav.vue'
 import FooterBar from './components/Footer.vue'
-
+import {userStore} from './stores/user'
 
 export default {
   name: "App",
@@ -22,14 +20,12 @@ export default {
     FooterBar
   }, data() {
     return {
-      //store: userStore()
+      store: userStore()
     };
-  }, mounted() {
-    
+  }, 
+  created(){
+    this.store.autoLogin();
   },
-  methods: {
-    
-  }
 }
   ;
 </script>
