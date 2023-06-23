@@ -1,6 +1,6 @@
 <template>
     <section>
-        <div class="container d-flex flex-column justify-content-center align-items-center form-container">
+        <div class="container d-flex flex-column justify-content-center align-items-center form-container" >
             <h1 class="m-5">Sign Up to PetWise</h1>
             <div v-if="showAlert" class="alert alert-danger alert-dismissible fade show" role="alert">
                 <strong>Error: </strong> {{ errorText }}
@@ -56,35 +56,48 @@ export default {
     },
     methods: {
         register() {
+            if (this.checkForInputs()) {
+                axios
+                    .post("users", {
+                        email: this.email,
+                        password: this.password,
+                        role: 0 // the registered new user will be a normal user (0) as default
+                    })
+                    .then(() => {
+                        this.successText = "Your account has been created successfully. Now you can login.";
+                        this.showSuccess = true;
+                        this.errorText = "";
+                        this.showAlert = false;
+                        this.email = ""; // clearing email input
+                        this.password = ""; // clear password input
+                        this.password_again = "";
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                        this.errorText = "There was a problem while creating your account. " + error.response.data.message;
+                        this.showAlert = true;
+                        this.showSuccess = false;
+                        this.successText = "";
+                    });
+            }
+        },
+        checkForInputs() {
             const passwordInput = document.getElementById('loginPasswordTextBox');
             const confirmPasswordInput = document.getElementById('loginPasswordTextBox2');
+
+            if (this.email.trim() === '' || this.password.trim() === '') {
+                this.errorText = 'Please enter all fields.';
+                this.showAlert = true;
+                return false;
+            }
+
             if (passwordInput.value !== confirmPasswordInput.value) {
                 this.errorText = 'Please make sure your passwords match.';
                 this.showAlert = true;
-                return;
+                return false;
             }
 
-            axios.post("users", {
-                email: this.email,
-                password: this.password,
-                role: 0 //the registered new user will be a normal user (0) as default
-            })
-                .then(() => {
-                    this.successText = "Your account have been created successfully. Now you can login. ";
-                    this.showSuccess = true;
-                    this.errorText = '';
-                    this.showAlert = false;
-                    this.email = ''; // clearing email input
-                    this.password = ''; // clear password input
-                    this.password_again = '';
-                })
-                .catch((error) => {
-                    console.log(error);
-                    this.errorText = "There was a problem while creating your account. " + error.response.data.message;
-                    this.showAlert = true;
-                    this.showSuccess = false;
-                    this.successText = '';
-                });
+            return true;
         }
 
     }

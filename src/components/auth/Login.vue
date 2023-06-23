@@ -43,10 +43,15 @@ export default {
     },
     methods: {
         login() {
+            if (this.email.trim() === '' || this.password.trim() === '') {
+                this.errorText = 'Please enter both username and password.';
+                this.showAlert = true;
+                return;
+            }
             this.store.login(this.email, this.password)
-            .then(() => {
-                this.$router.replace("/");
-            })
+                .then(() => {
+                    this.$router.replace("/");
+                })
                 .catch((error) => {
                     console.log(error);
                     this.errorText = "There was a problem while logging in to your account. " + error;
