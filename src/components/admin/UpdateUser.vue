@@ -25,7 +25,7 @@
                 </div>
                 <div class="m-2 form-group">
                     <label for="password">Password</label>
-                    <input type="password" class="my-2 form-control" v-model="password" id="password" aria-describedby="password"
+                    <input type="password" class="my-2 form-control" v-model="user.password" id="password" aria-describedby="password"
                         placeholder="************" required>
                 </div>
                 <div class="m-2 form-group">
@@ -69,9 +69,9 @@ export default {
         updateUser() {
             axios
                 .put("users/" + this.user.id, {
-                    email: this.email,
-                    password: this.password,
-                    role: this.role
+                    email: this.user.email,
+                    password: this.user.password,
+                    role: this.user.role
                 })
                 .then((res) => {
                     console.log(res.data);
@@ -87,7 +87,7 @@ export default {
                     this.showSuccess = false;
                     this.successText = '';
                 });
-        }
+        },
     },
     mounted() {
         const token = localStorage.getItem('token');

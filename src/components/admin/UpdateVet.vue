@@ -20,22 +20,22 @@
             <form>
                 <div class="m-2 form-group">
                     <label for="veterinarianFirstNameTextBox">Veterinarian First Name</label>
-                    <input type="text" class="my-2 form-control" v-model="firstName" id="veterinarianFirstNameTextBox"
+                    <input type="text" class="my-2 form-control" v-model="vet.firstName" id="veterinarianFirstNameTextBox"
                         aria-describedby="veterinarianFirstNameTextBox" placeholder="First name" required>
                 </div>
                 <div class="m-2 form-group">
                     <label for="veterinarianLastNameTextBox">Veterinarian Last Name</label>
-                    <input type="text" class="my-2 form-control" v-model="lastName" id="veterinarianLastNameTextBox"
+                    <input type="text" class="my-2 form-control" v-model="vet.lastName" id="veterinarianLastNameTextBox"
                         aria-describedby="veterinarianLastNameTextBox" placeholder="Last name" required>
                 </div>
                 <div class="m-2 form-group">
                     <label for="specializationTextBox">Specialization</label>
-                    <input type="text" class="my-2 form-control" v-model="specialization" id="specializationTextBox"
+                    <input type="text" class="my-2 form-control" v-model="vet.specialization" id="specializationTextBox"
                         aria-describedby="specializationTextBox" placeholder="Specialization" required>
                 </div>
                 <div class="mb-3">
-                    <label for="vetImageURL" class="form-label">Veterinarian Image Path*</label>
-                    <input type="text" class="my-2 form-control" v-model="imageURL" id="vetImageURL"
+                    <label for="vetImageURL" class="form-label">Veterinarian Image Path</label>
+                    <input type="text" class="my-2 form-control" v-model="vet.imageURL" id="vetImageURL"
                         aria-describedby="vetImageURL" placeholder="Image Path" required>
 
                 </div>
@@ -74,10 +74,10 @@ export default {
             const token = localStorage.getItem('token');
             axios
                 .put("vets/" + this.vet.id, {
-                    firstName: this.firstName,
-                    lastName: this.lastName,
-                    specialization: this.specialization,
-                    imageURL: this.imageURL,
+                    firstName: this.vet.firstName,
+                    lastName: this.vet.lastName,
+                    specialization: this.vet.specialization,
+                    imageURL: this.vet.imageURL,
                    
                 })
                 .then((res) => {

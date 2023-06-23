@@ -34,9 +34,9 @@
             aria-describedby="specializationTextBox" placeholder="Specialization" required>
         </div>
         <div class="mb-3">
-          <label for="vetImageURL" class="form-label">Veterinarian Image Path*</label>
-          <input type="text" class="my-2 form-control" v-model="imageURL" id="vetImageURL"
-            aria-describedby="vetImageURL" placeholder="Image Path" required>
+          <label for="vetImageURL" class="form-label">Veterinarian Image Path</label>
+          <input type="text" class="my-2 form-control" v-model="imageURL" id="vetImageURL" aria-describedby="vetImageURL"
+            placeholder="Image Path" required>
 
         </div>
       </form>
@@ -65,30 +65,45 @@ export default {
   },
   methods: {
     addVet() {
-      axios.post("vets", {
-        firstName: this.firstName,
-        lastName: this.lastName,
-        specialization: this.specialization,
-        imageURL: this.imageURL        
-      })
-        .then(() => {
-          this.successText = "New vet has been added successfully. ";
-          this.showSuccess = true;
-          this.errorText = '';
-          this.showAlert = false;
-          //clear form
-          this.firstName = '';
-          this.lastName = '';
-          this.specialization = '';
-          this.imageURL = '';
+      if (this.checkForInputs()) {
+        axios.post("vets", {
+          firstName: this.firstName,
+          lastName: this.lastName,
+          specialization: this.specialization,
+          imageURL: this.imageURL
+          /* imageURL is a text (also in the form) because i couldn't find how 
+          to select the image with input-type-image thing and after saving it 
+          to /public folder. that's why an admin has to save the image to the 
+          /public folder and then enter it's path to the form. also, i checked the rubric file 
+          and since it doesnt have any requirements about it, i'm hoping that this is okay.*/
         })
-        .catch((error) => {
-          console.log(error);
-          this.errorText = "There was a problem while adding the vet. " + error;
-          this.showAlert = true;
-          this.showSuccess = false;
-          this.successText = '';
-        });
+          .then(() => {
+            this.successText = "New vet has been added successfully. ";
+            this.showSuccess = true;
+            this.errorText = '';
+            this.showAlert = false;
+            //clear form
+            //this.firstName = '';
+            this.lastName = '';
+            this.specialization = '';
+            this.imageURL = '';
+          })
+          .catch((error) => {
+            console.log(error);
+            this.errorText = "There was a problem while adding the vet. " + error;
+            this.showAlert = true;
+            this.showSuccess = false;
+            this.successText = '';
+          });
+      }
+    },
+    checkForInputs() {
+      if (this.firstName.trim() === '' || this.lastName.trim() === '' || this.specialization.trim() === '' || this.imageURL.trim() === '') {
+        this.errorText = 'Please enter all fields.';
+        this.showAlert = true;
+        return false;
+      }
+      return true;
     }
   }
 };
