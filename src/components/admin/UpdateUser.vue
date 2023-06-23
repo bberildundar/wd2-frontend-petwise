@@ -90,7 +90,6 @@ export default {
         },
     },
     mounted() {
-        const token = localStorage.getItem('token');
         axios
             .get("users/" + this.id, {
                
