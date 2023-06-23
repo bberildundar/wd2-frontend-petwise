@@ -71,7 +71,6 @@ export default {
     },
     methods: {
         updateVet() {
-            const token = localStorage.getItem('token');
             axios
                 .put("vets/" + this.vet.id, {
                     firstName: this.vet.firstName,
@@ -97,7 +96,6 @@ export default {
         }
     },
     mounted() {
-        const token = localStorage.getItem('token');
         axios
             .get("vets/" + this.id, {
                 

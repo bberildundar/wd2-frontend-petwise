@@ -31,7 +31,6 @@ export default {
     },
     methods: {
         deleteVet(id) {
-            const token = localStorage.getItem('token');
             axios
                 .delete("vets/" + id, {
                 })
