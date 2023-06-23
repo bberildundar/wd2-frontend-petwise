@@ -18,9 +18,10 @@
             <a @click="scrollToVeterinarians" class="nav-link active" aria-current="page"
               style="font-size: 20px; cursor: pointer;">Veterinarians</a>
           </li>
-          <li class="nav-item"> <!-- i used <a> tag in here because these are only for scrolling. not for a new page. -->
-            <a @click="scrollToAddressAndContact" class="nav-link active" aria-current="page"
-              style="font-size: 20px; cursor: pointer;">Address & Contact</a>
+
+          <li class="nav-item" v-if="this.store.getRole == '1'"> <!-- only admins should see this nav item-->
+            <router-link to="/userList" class="nav-link active" aria-current="page"
+              style="font-size: 20px;">Users</router-link>
           </li>
 
         </ul>
@@ -53,11 +54,6 @@ export default {
   methods: {
     scrollToVeterinarians() {
       document.querySelector('#home-veterinarians-header').scrollIntoView({
-        behavior: 'smooth'
-      });
-    },
-    scrollToAddressAndContact() {
-      document.querySelector('#home-address-and-contact-header').scrollIntoView({
         behavior: 'smooth'
       });
     },

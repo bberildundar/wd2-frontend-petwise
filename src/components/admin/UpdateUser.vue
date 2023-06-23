@@ -2,11 +2,11 @@
     <section>
         <div class="container">
             <router-link to="/">
-                <button type="button" class="btn btn-outline-primary my-4">
+                <button type="button" class="btn btn-primary m-2">
                     Back
                 </button>
             </router-link>
-            <h2>Update a vet</h2>
+            <h2>Update a user</h2>
             <div v-if="showAlert" class="alert alert-danger alert-dismissible fade show" role="alert">
                 <strong>Error: </strong> {{ errorText }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
@@ -19,29 +19,26 @@
             </div>
             <form>
                 <div class="m-2 form-group">
-                    <label for="veterinarianFirstNameTextBox">Veterinarian First Name</label>
-                    <input type="text" class="my-2 form-control" v-model="firstName" id="veterinarianFirstNameTextBox"
-                        aria-describedby="veterinarianFirstNameTextBox" placeholder="First name" required>
+                    <label for="userEmail">User Email</label>
+                    <input type="text" class="my-2 form-control" v-model="email" id="userEmail" aria-describedby="userEmail"
+                        placeholder="email@email.com" required>
                 </div>
                 <div class="m-2 form-group">
-                    <label for="veterinarianLastNameTextBox">Veterinarian Last Name</label>
-                    <input type="text" class="my-2 form-control" v-model="lastName" id="veterinarianLastNameTextBox"
-                        aria-describedby="veterinarianLastNameTextBox" placeholder="Last name" required>
+                    <label for="password">Password</label>
+                    <input type="password" class="my-2 form-control" v-model="password" id="password" aria-describedby="password"
+                        placeholder="************" required>
                 </div>
                 <div class="m-2 form-group">
-                    <label for="specializationTextBox">Specialization</label>
-                    <input type="text" class="my-2 form-control" v-model="specialization" id="specializationTextBox"
-                        aria-describedby="specializationTextBox" placeholder="Specialization" required>
-                </div>
-                <div class="mb-3">
-                    <label for="vetImageURL" class="form-label">Veterinarian Image Path*</label>
-                    <input type="text" class="my-2 form-control" v-model="imageURL" id="vetImageURL"
-                        aria-describedby="vetImageURL" placeholder="Image Path" required>
+                    <p>Selected Role: {{ selectedRole }}</p>
+                    <select v-model="role">
+                        <option value="1">Admin</option>
+                        <option value="0">User</option>
+                    </select>
 
                 </div>
             </form>
             <div class="input-group mt-4">
-                <button type="button" class="btn btn-success" @click="updateVet">Update Vet</button>
+                <button type="button" class="btn btn-primary" @click="updateUser">Update User</button>
             </div>
         </div>
     </section>
@@ -50,18 +47,17 @@
 <script>
 import axios from '../../axios-auth';
 export default {
-    name: "UpdateVet",
+    name: "UpdateUser",
     props: {
         id: Number,
     },
     data() {
         return {
-            vet: {
+            user: {
                 id: "",
-                firstName: '',
-                lastName: '',
-                specialization: '',
-                imageURL: '',
+                email: '',
+                password: '',
+                role: ''
             },
             showAlert: false,
             errorText: '',
@@ -70,26 +66,23 @@ export default {
         };
     },
     methods: {
-        updateVet() {
-            const token = localStorage.getItem('token');
+        updateUser() {
             axios
-                .put("vets/" + this.vet.id, {
-                    firstName: this.firstName,
-                    lastName: this.lastName,
-                    specialization: this.specialization,
-                    imageURL: this.imageURL,
-                   
+                .put("users/" + this.user.id, {
+                    email: this.email,
+                    password: this.password,
+                    role: this.role
                 })
                 .then((res) => {
                     console.log(res.data);
-                    this.successText = "The vet has been updated successfully. ";
+                    this.successText = "The user has been updated successfully. ";
                     this.showSuccess = true;
                     this.errorText = '';
                     this.showAlert = false;
                 })
                 .catch((error) => {
                     console.log(error);
-                    this.errorText = "There was a problem while updating the vet. " + error;
+                    this.errorText = "There was a problem while updating the user. " + error;
                     this.showAlert = true;
                     this.showSuccess = false;
                     this.successText = '';
@@ -99,12 +92,12 @@ export default {
     mounted() {
         const token = localStorage.getItem('token');
         axios
-            .get("vets/" + this.id, {
-                
+            .get("users/" + this.id, {
+               
             })
             .then((result) => {
                 console.log(result);
-                this.vet = result.data;
+                this.user = result.data;
             })
             .catch((error) => console.log(error));
     },

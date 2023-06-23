@@ -15,7 +15,7 @@
         for your beloved pets.
         Our veterinarians are dedicated to ensuring the health and well-being of your furry friends.</p>
 
-        <div v-if="showAlert" class="alert alert-danger alert-dismissible fade show" role="alert">
+      <div v-if="showAlert" class="alert alert-danger alert-dismissible fade show" role="alert">
         <strong>Error: </strong> {{ errorText }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
           @click="showAlert = false"></button>
@@ -26,14 +26,17 @@
           @click="showSuccess = false"></button>
       </div>
 
+      <div v-if="store.getRole == '1'" >
       <router-link to="/createVet">
         <button type="button" class="btn btn-success my-3">
           Add Vet
         </button>
-      </router-link>
+      </router-link></div>
+
       <div class="row">
-        <vet-item v-for="vet in vets" :key="vet.id" :vet="vet" @update="update" @popUpSuccessText = "popUpSuccessText" @popUpErrorText = "popUpErrorText"/>
-        
+        <vet-item v-for="vet in vets" :key="vet.id" :vet="vet" @update="update" @popUpSuccessText="popUpSuccessText"
+          @popUpErrorText="popUpErrorText" />
+
       </div>
 
       <div class="row mt-5">
@@ -58,11 +61,13 @@
 <script>
 import axios from '../axios-auth';
 import VetItem from './vets/vetItem.vue';
+import { userStore } from '../stores/user';
 
 export default {
   name: 'HomePage',
   components: {
-    VetItem,
+    VetItem
+
   },
   data() {
     return {
@@ -70,7 +75,8 @@ export default {
       showAlert: false,
       errorText: '',
       showSuccess: false,
-      successText: ''
+      successText: '',
+      store: userStore()
     };
   },
   mounted() {
@@ -79,7 +85,7 @@ export default {
   methods: {
     update() {
       axios
-        .get("http://localhost/vets")
+        .get("vets")
         .then((result) => {
           console.log(result);
           this.vets = result.data;

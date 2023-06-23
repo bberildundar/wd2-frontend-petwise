@@ -2,8 +2,8 @@
   <section>
     <div class="container">
       <router-link to="/">
-        <button type="button" class="btn btn-primary m-2">
-          Back
+        <button type="button" class="btn btn-outline-primary my-4">
+          Back to Homepage
         </button>
       </router-link>
       <h2>Add a vet</h2>
@@ -41,7 +41,7 @@
         </div>
       </form>
       <div class="input-group mt-4">
-        <button type="button" class="btn btn-primary" @click="addVet">Add Vet</button>
+        <button type="button" class="btn btn-success" @click="addVet">Add Vet</button>
       </div>
     </div>
   </section>
@@ -65,11 +65,11 @@ export default {
   },
   methods: {
     addVet() {
-      axios.post("http://localhost/vets", {
+      axios.post("vets", {
         firstName: this.firstName,
         lastName: this.lastName,
         specialization: this.specialization,
-        imageURL: this.imageURL
+        imageURL: this.imageURL        
       })
         .then(() => {
           this.successText = "New vet has been added successfully. ";

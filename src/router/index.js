@@ -4,10 +4,9 @@ import Login from '../components/auth/Login.vue';
 import Register from '../components/auth/Register.vue';
 import Homepage from '../components/Homepage.vue';
 import UserList from '../components/admin/UserList.vue'
-import VetList from '../components/admin/VetList.vue'
-import CreateUser from '../components/admin/CreateUser.vue'
 import CreateVet from '../components/admin/CreateVet.vue'
 import UpdateVet from '../components/admin/UpdateVet.vue'
+import UpdateUser from '../components/admin/UpdateUser.vue'
 
 
 const router = createRouter({
@@ -17,8 +16,7 @@ const router = createRouter({
     { path: '/register', component: Register },
     { path: '/', component: Homepage },
     { path: '/userList', component: UserList },
-    { path: '/vetList', component: VetList },
-    { path: '/createUser', component: CreateUser },
+    { path: '/updateUser/:id', component: UpdateUser, props: true},
     { path: '/createVet', component: CreateVet },
     { path: '/updateVet/:id', component: UpdateVet, props: true}
   ]
